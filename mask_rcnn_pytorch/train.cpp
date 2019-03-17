@@ -1,5 +1,6 @@
-#include "cocodataset.h"
-#include "cocoloader.h"
+#include "vehicledataset.h"
+#include "vehicleloader.h"
+#include "datasetclasses.h"
 #include "config.h"
 #include "debug.h"
 #include "imageutils.h"
@@ -22,7 +23,7 @@ class TrainConfig : public Config {
       throw std::runtime_error("Cuda is not available");
     gpu_count = 1;
     images_per_gpu = 1;
-    num_classes = 81;  // 4 - for shapes, 81 - for coco dataset
+    num_classes = 11;  // 4 - for shapes, 81 - for coco dataset
 
     UpdateSettings();
   }
@@ -94,16 +95,18 @@ int main(int argc, char** argv) {
       model->to(torch::DeviceType::CUDA);
 
     // Make data sets
-    auto train_loader = std::make_unique<CocoLoader>(
-        fs::path(data_path) / "train2017",
-        fs::path(data_path) / "annotations/instances_train2017.json");
+    auto train_loader = std::make_unique<VehicleLoader>(
+        fs::path(data_path) / "",
+        fs::path(data_path) / "train_df_full.csv",
+        GetDataClasses());
     auto train_set =
-        std::make_unique<CocoDataset>(std::move(train_loader), config);
+        std::make_unique<VehicleDataset>(std::move(train_loader), config);
 
-    auto val_loader = std::make_unique<CocoLoader>(
-        fs::path(data_path) / "val2017",
-        fs::path(data_path) / "annotations/instances_val2017.json");
-    auto val_set = std::make_unique<CocoDataset>(std::move(val_loader), config);
+    auto val_loader = std::make_unique<VehicleLoader>(
+        fs::path(data_path) / "",
+        fs::path(data_path) / "dev_df_full.csv",
+        GetDataClasses());
+    auto val_set = std::make_unique<VehicleDataset>(std::move(val_loader), config);
 
     //    // Training - Stage 1
     std::cout << "Training network heads" << std::endl;

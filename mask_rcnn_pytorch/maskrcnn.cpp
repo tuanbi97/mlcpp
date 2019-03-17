@@ -42,8 +42,8 @@ std::tuple<at::Tensor, at::Tensor> MaskRCNNImpl::Detect(
   return {detections, mrcnn_mask};
 }
 
-void MaskRCNNImpl::Train(CocoDataset train_dataset,
-                         CocoDataset val_dataset,
+void MaskRCNNImpl::Train(VehicleDataset train_dataset,
+                         VehicleDataset val_dataset,
                          double learning_rate,
                          uint32_t epochs,
                          std::string layers_regex) {
@@ -145,7 +145,7 @@ void MaskRCNNImpl::Train(CocoDataset train_dataset,
 
 std::tuple<float, float, float, float, float, float> MaskRCNNImpl::ValidEpoch(
     StatReporter& reporter,
-    torch::data::DataLoader<CocoDataset, torch::data::samplers::RandomSampler>&
+    torch::data::DataLoader<VehicleDataset, torch::data::samplers::RandomSampler>&
         datagenerator,
     uint32_t steps) {
   float loss_sum = 0;
@@ -226,7 +226,7 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::ValidEpoch(
 
 std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
     StatReporter& reporter,
-    torch::data::DataLoader<CocoDataset, torch::data::samplers::RandomSampler>&
+    torch::data::DataLoader<VehicleDataset, torch::data::samplers::RandomSampler>&
         datagenerator,
     torch::optim::SGD& optimizer,
     torch::optim::SGD& optimizer_bn,

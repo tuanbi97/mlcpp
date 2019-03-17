@@ -2,7 +2,7 @@
 #define MASKRCNN_H
 
 #include "classifier.h"
-#include "cocodataset.h"
+#include "vehicledataset.h"
 #include "config.h"
 #include "fpn.h"
 #include "imageutils.h"
@@ -47,8 +47,8 @@ class MaskRCNNImpl : public torch::nn::Module {
    *            4+: Train Resnet stage 4 and up
    *            5+: Train Resnet stage 5 and up
    */
-  void Train(CocoDataset train_dataset,
-             CocoDataset val_dataset,
+  void Train(VehicleDataset train_dataset,
+             VehicleDataset val_dataset,
              double learning_rate,
              uint32_t epochs,
              std::string layers_regex);
@@ -60,7 +60,7 @@ class MaskRCNNImpl : public torch::nn::Module {
   std::string GetCheckpointPath(uint32_t epoch) const;
   std::tuple<float, float, float, float, float, float> TrainEpoch(
       StatReporter& reporter,
-      torch::data::DataLoader<CocoDataset,
+      torch::data::DataLoader<VehicleDataset,
                               torch::data::samplers::RandomSampler>&
           datagenerator,
       torch::optim::SGD& optimizer,
@@ -68,7 +68,7 @@ class MaskRCNNImpl : public torch::nn::Module {
       uint32_t steps);
   std::tuple<float, float, float, float, float, float> ValidEpoch(
       StatReporter& reporter,
-      torch::data::DataLoader<CocoDataset,
+      torch::data::DataLoader<VehicleDataset,
                               torch::data::samplers::RandomSampler>&
           datagenerator,
       uint32_t steps);
