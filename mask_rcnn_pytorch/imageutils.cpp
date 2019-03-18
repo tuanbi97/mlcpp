@@ -109,6 +109,7 @@ cv::Mat ConvertPolygonToMask(const std::vector<int32_t> &polygon,
     contours[0].push_back(cv::Point(polygon[p_idx], polygon[p_idx + 1]));
   }
 
+  std::cout << contours.size() << std::endl;
   cv::drawContours(mask, contours, -1, cv::Scalar(255), cv::FILLED);
 
   return mask;
