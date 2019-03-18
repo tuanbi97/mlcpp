@@ -79,6 +79,7 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
     cv::Size size(info.width, info.height);
 
     std::vector<cv::Mat> masks(info.contours.size());
+    std::cout << info.contours.size() << std::endl;
 
     std::size_t c_idx = 0;
     for (const auto &contour : info.contours)
