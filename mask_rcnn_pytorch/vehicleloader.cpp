@@ -17,6 +17,7 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
 {
     std::cout << string_points << std::endl;
     std::vector<std::string> v_string_points = SplitString(string_points, '|');
+    std::cout << v_string_points.size() <<  std::endl;
     for (const auto &s : v_string_points)
     {
         image_info.contours.emplace_back();
@@ -227,7 +228,6 @@ void VehicleLoader::LoadData()
 
             std::string contours(row[field_indices["pts"]]);
             trim(contours);
-            std::cout << "contours: " << contours << std::endl;
 
             std::string has_mask(row[field_indices["has_mask"]]);
             trim(has_mask);
