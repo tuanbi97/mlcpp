@@ -18,7 +18,7 @@ void Loader::Prepare()
     std::cout<<"1\n";
     this->num_classes_ = this->class_infos_.size();
     std::cout<<this->num_classes_ << std::endl;
-    for (std::uint16_t i; i < this->num_classes_; ++i)
+    for (std::uint16_t i = 0; i < this->num_classes_; ++i)
     {
         this->class_id_from_class_name_map_[this->class_infos_[i].class_name] = i;
         this->class_ids_.push_back(i);
@@ -26,7 +26,7 @@ void Loader::Prepare()
     std::cout<<"2\n";
 
     this->num_images_ = this->image_infos_.size();
-    for (std::uint32_t i; i < this->num_images_; ++i)
+    for (std::uint32_t i = 0; i < this->num_images_; ++i)
     {
         this->image_ids_.push_back(i);
     }
