@@ -201,7 +201,6 @@ void VehicleLoader::LoadData()
         {
             bool contains_all_fields = true;
             // check all the fields
-            std::cout << row[0] << std::endl;
             for (const auto &field : csv_fields)
             {
                 if (row[field_indices[field]].empty())
@@ -231,7 +230,7 @@ void VehicleLoader::LoadData()
             std::string has_mask(row[field_indices["has_mask"]]);
             trim(has_mask);
 
-            image_path += file;
+            image_path = file;
 
             if (!fs::exists(image_path))
             {
