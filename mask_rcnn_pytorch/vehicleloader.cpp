@@ -125,6 +125,7 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
 
         std::transform(s.begin(), s.end(), s.begin(), ::tolower);
         trim(s);
+        s = s.substr(1, s.length() - 2);
         std::cout<<s<<std::endl;
 
         if (this->class_id_from_class_name_map_.find(s) != this->class_id_from_class_name_map_.end())
