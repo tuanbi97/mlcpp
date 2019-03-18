@@ -4,16 +4,16 @@ namespace {
 // std::vector<std::string> class_names = {"BG", "square", "triangle",
 // "circle"};
 
-std::vector<std::string> class_names = {"BG",
-                                        "Sedan",
-                                        "SUV",
-                                        "Van",
-                                        "Bus",
-                                        "Pick-up Truck",
-                                        "Semi-trailer Truck",
-                                        "Motorcycle",
-                                        "Bicycle",
-                                        "Other"
+std::vector<std::string> class_names = {"bg",
+                                        "sedan",
+                                        "suv",
+                                        "van",
+                                        "bus",
+                                        "pick-up truck",
+                                        "semi-trailer truck",
+                                        "motorcycle",
+                                        "bicycle",
+                                        "other"
                                       };
 }  // namespace
 
