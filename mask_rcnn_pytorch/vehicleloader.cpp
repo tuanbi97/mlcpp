@@ -226,7 +226,7 @@ void VehicleLoader::LoadData()
 
             std::string contours(row[field_indices["pts"]]);
             trim(contours);
-            std::cout << "contours: " << contours << endl;
+            std::cout << "contours: " << contours << std::endl;
 
             std::string has_mask(row[field_indices["has_mask"]]);
             trim(has_mask);
