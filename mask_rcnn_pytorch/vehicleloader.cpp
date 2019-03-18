@@ -99,7 +99,7 @@ VehicleLoader::VehicleLoader(const std::string &images_folder,
 std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMask(const std::uint64_t &image_id)
 {
     ImageInfo info = this->image_infos_[image_id];
-    std::cout << info.source << " " << info.path << " " << info.contours.size() << std::endl;
+    //std::cout << info.source << " " << info.path << " " << info.contours.size() << std::endl;
 
     assert(this->has_mask_);
 
@@ -110,11 +110,13 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
     std::size_t c_idx = 0;
     for (const auto &contour : info.contours)
     {
-        std::cout << contour.size() << std::endl;
+        //std::cout << contour.size() << std::endl;
         cv::Mat mask = ConvertPolygonToMask(contour, size);
         masks[c_idx] = mask;
         ++c_idx;
     }
+
+    std::cout << info.class_ids << std::endl;
 
     std::vector<std::string> s_class_ids = SplitString(info.class_ids, ';');
     std::vector<std::int32_t> class_ids;
