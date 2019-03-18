@@ -12,13 +12,6 @@ struct Point
     int32_t y{0};
 };
 
-struct BoundingBox
-{
-    Point top_left;
-    int32_t width{0};
-    int32_t height{0};
-};
-
 struct StrToFloat
 {
     float operator()(std::string const &str) { return std::stof(str); }

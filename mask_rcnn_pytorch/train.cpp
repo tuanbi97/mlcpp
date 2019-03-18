@@ -23,7 +23,7 @@ class TrainConfig : public Config {
       throw std::runtime_error("Cuda is not available");
     gpu_count = 1;
     images_per_gpu = 1;
-    num_classes = 11;  // 4 - for shapes, 81 - for coco dataset
+    num_classes = 10;  // 4 - for shapes, 81 - for coco dataset
 
     UpdateSettings();
   }
@@ -98,14 +98,14 @@ int main(int argc, char** argv) {
     auto train_loader = std::make_unique<VehicleLoader>(
         fs::path(data_path) / "",
         fs::path(data_path) / "train_df_full.csv",
-        GetDataClasses());
+        GetDatasetClasses());
     auto train_set =
         std::make_unique<VehicleDataset>(std::move(train_loader), config);
 
     auto val_loader = std::make_unique<VehicleLoader>(
         fs::path(data_path) / "",
         fs::path(data_path) / "dev_df_full.csv",
-        GetDataClasses());
+        GetDatasetClasses());
     auto val_set = std::make_unique<VehicleDataset>(std::move(val_loader), config);
 
     //    // Training - Stage 1

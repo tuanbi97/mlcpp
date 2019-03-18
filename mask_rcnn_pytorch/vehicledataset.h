@@ -11,7 +11,7 @@
 struct Input
 {
     torch::Tensor image;
-    ImageMeta image_meta_data;
+    ImageMeta image_meta;
 };
 
 struct Target
