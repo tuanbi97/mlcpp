@@ -33,6 +33,7 @@ void Loader::Prepare()
     std::cout<<"3\n";
     for (int i = 0; i < this->class_infos_.size(); ++i)
     {
+        std::cout << i << std::endl;
         std::string key = this->class_infos_[i].source + "." + std::to_string(this->class_infos_[i].id);
         this->class_from_source_map_[key] = this->class_ids_[i];
     }
