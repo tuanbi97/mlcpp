@@ -249,6 +249,8 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
     ++batch_count;
     assert(input.size() == 1);
 
+    std::cout << input[0].data.image << std::endl;
+
     // Wrap input in variables
     auto images = input[0].data.image;
     auto rpn_match = input[0].target.rpn_match;
