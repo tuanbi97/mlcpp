@@ -233,6 +233,7 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
     torch::optim::SGD& optimizer,
     torch::optim::SGD& optimizer_bn,
     uint32_t steps) {
+    std::cout << "1212" << std::endl;
   uint32_t batch_count = 0;
   float loss_sum = 0;
   float loss_rpn_class_sum = 0;
@@ -248,8 +249,6 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
   for (auto input : datagenerator) {
     ++batch_count;
     assert(input.size() == 1);
-
-    std::cout << input[0].data.image << std::endl;
 
     // Wrap input in variables
     auto images = input[0].data.image;
