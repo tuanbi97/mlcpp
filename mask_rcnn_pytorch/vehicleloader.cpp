@@ -184,6 +184,7 @@ void VehicleLoader::LoadData()
             for (auto &field : row)
             {
                 field_indices[field] = field_index++;
+                std::cout << field << std::endl;
             }
 
             // check all the fields
