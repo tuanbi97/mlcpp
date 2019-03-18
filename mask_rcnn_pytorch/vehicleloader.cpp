@@ -170,7 +170,6 @@ std::string VehicleLoader::ImageReference(const std::uint64_t &image_id)
 
 void VehicleLoader::LoadData()
 {
-    std::cout << annotations_file_ << std::endl;
     std::ifstream f(annotations_file_);
     aria::csv::CsvParser parser = aria::csv::CsvParser(f);
     std::map<std::string, int> field_indices;
@@ -180,6 +179,7 @@ void VehicleLoader::LoadData()
     int index = 0;
     for (auto &row : parser)
     {
+        if (index > 1) break;
         if (!header_parsed)
         {
             for (auto &field : row)
@@ -258,6 +258,5 @@ void VehicleLoader::LoadData()
             this->AddImage(image_info);
             index++;
         }
-        break;
     }
 }
