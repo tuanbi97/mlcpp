@@ -245,10 +245,11 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
   optimizer.zero_grad();
   optimizer_bn.zero_grad();
   
-  std::cout << "1212" << std::endl;
+  std::cout << "train start" << std::endl;
 
   for (auto input : datagenerator) {
     ++batch_count;
+    std::cout << batch_count << std::endl;
     assert(input.size() == 1);
 
     // Wrap input in variables
