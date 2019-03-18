@@ -199,6 +199,7 @@ void VehicleLoader::LoadData()
         }
         else
         {
+            std::cout << index << std::endl;
             bool contains_all_fields = true;
             // check all the fields
             for (const auto &field : csv_fields)
