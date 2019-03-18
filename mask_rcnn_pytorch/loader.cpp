@@ -19,6 +19,7 @@ void Loader::Prepare()
     this->num_classes_ = this->class_infos_.size();
     for (std::uint16_t i; i < this->num_classes_; ++i)
     {
+        std::cout<<"class_name\n";
         this->class_id_from_class_name_map_[this->class_infos_[i].class_name] = i;
         this->class_ids_.push_back(i);
     }
