@@ -150,13 +150,14 @@ Sample VehicleDataset::get(size_t index)
     std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> mask_class_pair = this->vehicle_loader_->LoadMask(index);
     
 
-    std::cout << "load mask" << std::endl;
     auto masks = ResizeMasks(mask_class_pair.first, scale, padding);
-    std::cout << "finish mask" << std::endl;    
+    
 
     std::vector<float> boxes;
 
+    std::cout << "load mask" << std::endl;
     std::vector<BoundingBox> bboxes = this->vehicle_loader_->LoadBBoxes(index);
+    std::cout << "finish mask" << std::endl;    
 
     boxes.reserve(bboxes.size() * 4);
     for (auto bbox : bboxes)
