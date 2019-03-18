@@ -134,7 +134,9 @@ VehicleDataset::VehicleDataset(std::shared_ptr<VehicleLoader> loader, std::share
     : vehicle_loader_(loader), config_(config)
 {
     loader->LoadData();
+    std::cout<<"start\n";
     loader->Prepare();
+    std::cout<<"end\n";
 };
 
 Sample VehicleDataset::get(size_t index)
