@@ -126,7 +126,7 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
         std::transform(s.begin(), s.end(), s.begin(), ::tolower);
         trim(s);
         s = s.substr(1, s.length() - 2);
-        if (s.equal("pedestrian")){
+        if (s.compare("pedestrian") == 0){
             s = "other";
         }
 
