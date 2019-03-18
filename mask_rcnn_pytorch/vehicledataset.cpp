@@ -157,7 +157,6 @@ Sample VehicleDataset::get(size_t index)
 
     std::vector<BoundingBox> bboxes = this->vehicle_loader_->LoadBBoxes(index);
     
-
     boxes.reserve(bboxes.size() * 4);
     for (auto bbox : bboxes)
     {
@@ -170,10 +169,12 @@ Sample VehicleDataset::get(size_t index)
     // Make training sample
     Sample result;
 
-    std::cout << "load mask" << std::endl;
     image = MoldImage(temp_image, *config_);
-    std::cout << "finish mask" << std::endl;    
+    
+    
+    std::cout << "load mask" << std::endl;
     result.data.image = CvImageToTensor(image);
+    std::cout << "finish mask" << std::endl;    
     result.data.image_meta.image_id = static_cast<int32_t>(index);
     result.data.image_meta.window = window;
     result.data.image_meta.image_width = image_shape.width;
