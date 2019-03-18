@@ -184,7 +184,6 @@ void VehicleLoader::LoadData()
             for (auto &field : row)
             {
                 field_indices[field] = field_index++;
-                std::cout << field << std::endl;
             }
 
             // check all the fields
@@ -202,6 +201,7 @@ void VehicleLoader::LoadData()
         {
             bool contains_all_fields = true;
             // check all the fields
+            std::cout << row[0] << std::endl;
             for (const auto &field : csv_fields)
             {
                 if (row[field_indices[field]].empty())
