@@ -76,6 +76,7 @@ void Loader::AddClass(const std::string &source, const std::uint16_t &class_id, 
     // source cannot contain dot
     assert(source.find(".") == std::string::npos);
 
+    std::cout << source << " " << class_id << " " << class_name << std::endl;
     for (std::vector<ClassInfo>::iterator it = this->class_infos_.begin(); it != this->class_infos_.end(); ++it)
     {
         // exist skip
