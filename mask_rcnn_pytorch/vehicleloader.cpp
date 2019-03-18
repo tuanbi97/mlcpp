@@ -29,10 +29,8 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
             level--;
             if (level == 1){
                 std::string ss = string_points.substr(previous_pos, i - previous_pos);
-                std::cout << ss << std::endl;
                 image_info.contours.emplace_back();
                 std::vector<std::string> v_points_string = SplitString(ss, ',');
-                std::cout << v_points_string.size() << std::endl;
                 for (auto &s : v_points_string)
                 {
                     image_info.AddContourCoordinates(std::strtof(s.c_str(), 0));
