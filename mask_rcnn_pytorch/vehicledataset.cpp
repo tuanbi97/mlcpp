@@ -140,6 +140,7 @@ VehicleDataset::VehicleDataset(std::shared_ptr<VehicleLoader> loader, std::share
 
 Sample VehicleDataset::get(size_t index)
 {
+    std::cout << index << std::endl;
     cv::Mat image = this->vehicle_loader_->LoadImage(index);
     ImageShape image_shape(image.size().width, image.size().height);
 
