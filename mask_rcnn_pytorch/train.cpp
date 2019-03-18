@@ -101,8 +101,10 @@ int main(int argc, char** argv) {
         fs::path(data_path) / "",
         fs::path(data_path) / "train_df_full.csv",
         GetDatasetClasses());
+    std::cout << "begin\n";
     auto train_set =
         std::make_unique<VehicleDataset>(std::move(train_loader), config);
+    std::cout << "end\n";
 
     auto val_loader = std::make_unique<VehicleLoader>(
         fs::path(data_path) / "",
