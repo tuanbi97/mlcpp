@@ -140,14 +140,15 @@ VehicleDataset::VehicleDataset(std::shared_ptr<VehicleLoader> loader, std::share
 
 Sample VehicleDataset::get(size_t index)
 {
-    std::cout << index << std::endl;
     cv::Mat image = this->vehicle_loader_->LoadImage(index);
     ImageShape image_shape(image.size().width, image.size().height);
 
     auto [temp_image, window, scale, padding] =
         ResizeImage(image, config_->image_min_dim, config_->image_max_dim, config_->image_padding);
 
+    std::cout << "load mask" << std::endl;
     std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> mask_class_pair = this->vehicle_loader_->LoadMask(index);
+    std::cout << "finish mask" << std::endl;
 
     auto masks = ResizeMasks(mask_class_pair.first, scale, padding);
 
