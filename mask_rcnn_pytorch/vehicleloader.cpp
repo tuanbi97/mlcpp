@@ -126,7 +126,6 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
         std::transform(s.begin(), s.end(), s.begin(), ::tolower);
         trim(s);
         s = s.substr(1, s.length() - 2);
-        std::cout<<s<<std::endl;
 
         if (this->class_id_from_class_name_map_.find(s) != this->class_id_from_class_name_map_.end())
             class_ids.push_back(this->class_id_from_class_name_map_[s]);
@@ -134,7 +133,7 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
 
     //        std::transform(s_class_ids.begin(), s_class_ids.end(), std::back_inserter(class_ids),
     //                        [](const std::string &str){ return std::stoi(str); });
-
+    std::cout << masks.size() << " " << class_ids.size() << std::endl;
     return std::make_pair(masks, class_ids);
 }
 
