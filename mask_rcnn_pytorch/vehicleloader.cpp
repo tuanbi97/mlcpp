@@ -20,6 +20,7 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
     std::cout << v_string_points.size() <<  std::endl;
     for (const auto &s : v_string_points)
     {
+        std::cout << s <<  std::endl;
         image_info.contours.emplace_back();
         // assumption is string_points are comma separated values of x,y like "0,0,1,1,2,3"
         std::vector<std::string> v_points_string = SplitString(s, ';');
