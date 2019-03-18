@@ -118,12 +118,13 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
 
     std::cout << info.class_ids << std::endl;
 
-    std::vector<std::string> s_class_ids = SplitString(info.class_ids, ';');
+    std::vector<std::string> s_class_ids = SplitString(info.class_ids, ',');
     std::vector<std::int32_t> class_ids;
     for (auto &s : s_class_ids)
     {
 
         std::transform(s.begin(), s.end(), s.begin(), ::tolower);
+        std::cout<<s<<std::endl;
 
         if (this->class_id_from_class_name_map_.find(s) != this->class_id_from_class_name_map_.end())
             class_ids.push_back(this->class_id_from_class_name_map_[s]);
