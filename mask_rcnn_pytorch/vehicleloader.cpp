@@ -15,20 +15,45 @@ const std::set<std::string> VehicleLoader::csv_fields{"file", "pts", "labels", "
 
 void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &image_info)
 {
-    std::cout << string_points << std::endl;
-    std::vector<std::string> v_string_points = SplitString(string_points, '|');
-    std::cout << v_string_points.size() <<  std::endl;
-    for (const auto &s : v_string_points)
-    {
-        std::cout << s <<  std::endl;
-        image_info.contours.emplace_back();
-        // assumption is string_points are comma separated values of x,y like "0,0,1,1,2,3"
-        std::vector<std::string> v_points_string = SplitString(s, ';');
-        for (auto &s : v_points_string)
-        {
-            image_info.AddContourCoordinates(std::strtof(s.c_str(), 0));
+    int index = 0;
+    int level = 0;
+    int previous_pos = 0;
+    for (int i = 0; i < string_points.length(); i++){
+        if (string_points[i] == '['){
+            level++;
+            if (level == 2){
+                previous_pos = i;
+            }
+        }
+        if (string_points[i] == ']'){
+            level--;
+            if (level == 1){
+                std::string ss = string_points.substr(previous_pos, i - previous_pos);
+                std::cout << ss << std::endl;
+                image_info.contours.emplace_back();
+                std::vector<std::string> v_points_string = SplitString(ss, ',');
+                std::cout << v_points_string.size() << std::endl;
+                for (auto &s : v_points_string)
+                {
+                    image_info.AddContourCoordinates(std::strtof(s.c_str(), 0));
+                }
+            }
         }
     }
+    // std::cout << string_points << std::endl;
+    // std::vector<std::string> v_string_points = SplitString(string_points, '|');
+    // std::cout << v_string_points.size() <<  std::endl;
+    // for (const auto &s : v_string_points)
+    // {
+    //     std::cout << s <<  std::endl;
+    //     image_info.contours.emplace_back();
+    //     // assumption is string_points are comma separated values of x,y like "0,0,1,1,2,3"
+    //     std::vector<std::string> v_points_string = SplitString(s, ';');
+    //     for (auto &s : v_points_string)
+    //     {
+    //         image_info.AddContourCoordinates(std::strtof(s.c_str(), 0));
+    //     }
+    // }
 }
 
 void VehicleLoader::_AddClassesToBase(const std::vector<std::string> &classes)
