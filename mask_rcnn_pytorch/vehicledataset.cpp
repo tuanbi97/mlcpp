@@ -27,6 +27,7 @@ std::tuple<at::Tensor, at::Tensor> BuildRpnTargets(at::Tensor anchors,
                                                    at::Tensor gt_boxes,
                                                    const Config &config)
 {
+    std::cout << anchors.size(0) << std::endl;
     // RPN Match: 1 = positive anchor, -1 = negative anchor, 0 = neutral
     auto rpn_match = torch::zeros({anchors.size(0)}, at::dtype(at::kInt));
     // RPN bounding boxes: [max anchors per image, (dy, dx, log(dh), log(dw))]
