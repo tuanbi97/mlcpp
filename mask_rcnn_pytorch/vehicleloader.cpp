@@ -274,7 +274,7 @@ void VehicleLoader::LoadData()
             image_info.width = image.size().width;
             image_info.height = image.size().height;
             image_info.path = image_path.string();
-            image_info.class_ids = labels;
+            image_info.class_ids = labels.substr(1, labels.length() - 2);
 
             // do something about the contours
             this->_ParseContours(contours, image_info);
