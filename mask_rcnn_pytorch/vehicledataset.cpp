@@ -146,11 +146,13 @@ Sample VehicleDataset::get(size_t index)
     auto [temp_image, window, scale, padding] =
         ResizeImage(image, config_->image_min_dim, config_->image_max_dim, config_->image_padding);
 
-    std::cout << "load mask" << std::endl;
+    
     std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> mask_class_pair = this->vehicle_loader_->LoadMask(index);
-    std::cout << "finish mask" << std::endl;    
+    
 
+    std::cout << "load mask" << std::endl;
     auto masks = ResizeMasks(mask_class_pair.first, scale, padding);
+    std::cout << "finish mask" << std::endl;    
 
     std::vector<float> boxes;
 
