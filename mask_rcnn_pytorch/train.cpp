@@ -81,13 +81,15 @@ int main(int argc, char** argv) {
 
     // load weights before moving to GPU
     if (params_path.find(".json") != std::string::npos) {
+	//printf("LoadJSON");
       LoadStateDictJson(*model, params_path);
     } else {
       // Uncoment to load only resnet
-      //      std::string ignore_layers =
-      //          "(fpn.P5\\_.*)|(fpn.P4\\_.*)|(fpn.P3\\_.*)|(fpn.P2\\_.*)|(rpn.*)|("
-      //          "classifier.*)|(mask.*)";
-      std::string ignore_layers{""};
+            std::string ignore_layers =
+                "(fpn.P5\\_.*)|(fpn.P4\\_.*)|(fpn.P3\\_.*)|(fpn.P2\\_.*)|(rpn.*)|("
+                "classifier.*)|(mask.*)";
+	//printf("Loadmodel");
+      //std::string ignore_layers{""};
       LoadStateDict(*model, params_path, ignore_layers);
     }
 
