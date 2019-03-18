@@ -48,8 +48,6 @@ VehicleLoader::VehicleLoader(const std::string &images_folder,
                              const std::string &annotations_file,
                              const std::vector<std::string> &classes)
 {
-    std::cout << images_folder << std::endl;
-    std::cout << annotations_file << std::endl;
     fs::path images_path(images_folder);
     if (!fs::exists(images_path))
         throw std::runtime_error(images_path.string() + " folder not found!!!");
@@ -169,7 +167,6 @@ std::string VehicleLoader::ImageReference(const std::uint64_t &image_id)
 
 void VehicleLoader::LoadData()
 {
-    std::cout << annotations_file_ << std::endl;
     std::ifstream f(annotations_file_);
     aria::csv::CsvParser parser = aria::csv::CsvParser(f);
     std::map<std::string, int> field_indices;
@@ -202,7 +199,6 @@ void VehicleLoader::LoadData()
         }
         else
         {
-            std::cout << index << std::endl;
             bool contains_all_fields = true;
             // check all the fields
             for (const auto &field : csv_fields)

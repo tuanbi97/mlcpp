@@ -111,12 +111,14 @@ void MaskRCNNImpl::Train(VehicleDataset train_dataset,
         torch::data::DataLoaderOptions().batch_size(1).workers(
             workers_num));  // random sampler is default
 
+    std::cout << "begin" << std::endl;
     // Training
     auto [loss, loss_rpn_class, loss_rpn_bbox, loss_mrcnn_class,
           loss_mrcnn_bbox, loss_mrcnn_mask] =
         TrainEpoch(reporter, *train_loader, optim_no_bn, optim_bn,
                    config_->steps_per_epoch);
 
+    std::cout << "end" << std::endl;
     //  Validation
     auto [val_loss, val_loss_rpn_class, val_loss_rpn_bbox, val_loss_mrcnn_class,
           val_loss_mrcnn_bbox, val_loss_mrcnn_mask] =
