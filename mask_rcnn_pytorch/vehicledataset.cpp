@@ -171,22 +171,22 @@ Sample VehicleDataset::get(size_t index)
 
     image = MoldImage(temp_image, *config_);
     
-    
-    std::cout << "load mask" << std::endl;
     result.data.image = CvImageToTensor(image);
-    std::cout << "finish mask" << std::endl;    
     result.data.image_meta.image_id = static_cast<int32_t>(index);
     result.data.image_meta.window = window;
     result.data.image_meta.image_width = image_shape.width;
     result.data.image_meta.image_height = image_shape.height;
 
     std::vector<at::Tensor> tmasks;
+    
+    std::cout << "load mask" << std::endl;
     for (auto &m : masks)
     {
         auto mask = CvImageToTensor(m) != 0;
         tmasks.push_back(mask.to(at::kFloat));
     }
     result.target.gt_masks = torch::stack(tmasks);
+    std::cout << "finish mask" << std::endl;    
 
     int32_t annotations_num = static_cast<int32_t>(bboxes.size());
     result.target.gt_boxes = torch::tensor(boxes, at::dtype(at::kFloat))
