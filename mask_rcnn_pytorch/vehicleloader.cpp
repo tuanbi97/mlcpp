@@ -169,7 +169,7 @@ std::string VehicleLoader::ImageReference(const std::uint64_t &image_id)
 
 void VehicleLoader::LoadData()
 {
-    std::cout << annotations_file_ << endl;
+    std::cout << annotations_file_ << std::endl;
     std::ifstream f(annotations_file_);
     aria::csv::CsvParser parser = aria::csv::CsvParser(f);
     std::map<std::string, int> field_indices;
