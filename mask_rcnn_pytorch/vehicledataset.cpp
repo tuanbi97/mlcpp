@@ -179,14 +179,12 @@ Sample VehicleDataset::get(size_t index)
 
     std::vector<at::Tensor> tmasks;
     
-    std::cout << "load mask" << std::endl;
     for (auto &m : masks)
     {
         auto mask = CvImageToTensor(m) != 0;
         tmasks.push_back(mask.to(at::kFloat));
     }
     result.target.gt_masks = torch::stack(tmasks);
-    std::cout << "finish mask" << std::endl;    
 
     int32_t annotations_num = static_cast<int32_t>(bboxes.size());
     result.target.gt_boxes = torch::tensor(boxes, at::dtype(at::kFloat))
@@ -194,9 +192,12 @@ Sample VehicleDataset::get(size_t index)
                                  .clone();
     result.target.gt_class_ids = torch::tensor(mask_class_pair.second, at::dtype(at::kInt)).clone();
 
+    
+    std::cout << "load mask" << std::endl;
     // RPN Targets
     auto [rpn_match, rpn_bbox] = BuildRpnTargets(anchors_, result.target.gt_boxes, *config_);
-
+    
+    std::cout << "finish mask" << std::endl;    
     // If more instances than fits in the array, sub-sample from them.
     if (result.target.gt_boxes.size(0) > config_->max_gt_instances)
     {
