@@ -40,8 +40,7 @@ void Loader::Prepare()
         std::cout << i << std::endl;
         std::cout << this->class_infos_[i].source << std::endl;
         std::string key = this->class_infos_[i].source + "." + std::to_string(this->class_infos_[i].id);
-        std::cout << key << " " << this->class_ids_[i] << std::endl;
-        std::cout << this->class_from_source_map_[key] << std::endl;
+        std::cout << key << " " << this->class_ids_.size() << std::endl;
         this->class_from_source_map_[key] = this->class_ids_[i];
         std::cout << "done!" << std::endl;
     }
