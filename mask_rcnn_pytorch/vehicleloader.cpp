@@ -48,8 +48,8 @@ VehicleLoader::VehicleLoader(const std::string &images_folder,
                              const std::string &annotations_file,
                              const std::vector<std::string> &classes)
 {
-    std::cout << images_folder << endl;
-    std::cout << annotations_file << endl;
+    std::cout << images_folder << std::endl;
+    std::cout << annotations_file << std::endl;
     fs::path images_path(images_folder);
     if (!fs::exists(images_path))
         throw std::runtime_error(images_path.string() + " folder not found!!!");
