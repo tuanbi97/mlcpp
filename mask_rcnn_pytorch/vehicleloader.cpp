@@ -22,7 +22,7 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
         if (string_points[i] == '['){
             level++;
             if (level == 2){
-                previous_pos = i;
+                previous_pos = i + 1;
             }
         }
         if (string_points[i] == ']'){
