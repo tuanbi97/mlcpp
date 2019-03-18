@@ -73,7 +73,7 @@ VehicleLoader::VehicleLoader(const std::string &images_folder,
 std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMask(const std::uint64_t &image_id)
 {
     ImageInfo info = this->image_infos_[image_id];
-    std::cout << info.source << " " << info.path << std::endl;
+    std::cout << info.source << " " << info.path << " " << info.contours.size() << std::endl;
 
     assert(this->has_mask_);
 
