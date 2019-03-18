@@ -15,12 +15,14 @@ Loader::Loader()
 
 void Loader::Prepare()
 {
+    std::cout<<"1\n";
     this->num_classes_ = this->class_infos_.size();
     for (std::uint16_t i; i < this->num_classes_; ++i)
     {
         this->class_id_from_class_name_map_[this->class_infos_[i].class_name] = i;
         this->class_ids_.push_back(i);
     }
+    std::cout<<"2\n";
 
     this->num_images_ = this->image_infos_.size();
     for (std::uint32_t i; i < this->num_images_; ++i)
@@ -28,24 +30,28 @@ void Loader::Prepare()
         this->image_ids_.push_back(i);
     }
 
+    std::cout<<"3\n";
     for (int i = 0; i < this->class_infos_.size(); ++i)
     {
         std::string key = this->class_infos_[i].source + "." + std::to_string(this->class_infos_[i].id);
         this->class_from_source_map_[key] = this->class_ids_[i];
     }
 
+    std::cout<<"4\n";
     for (int i = 0; i < this->image_infos_.size(); ++i)
     {
         std::string key = this->image_infos_[i].source + this->image_infos_[i].id;
         this->image_from_source_map_[key] = this->image_ids_[i];
     }
 
+    std::cout<<"5\n";
     std::set<std::string> unique_sources;
     for (const auto &info : this->class_infos_)
     {
         unique_sources.insert(info.source);
     }
 
+    std::cout<<"6\n";
     this->sources_ = std::vector<std::string>(unique_sources.begin(), unique_sources.end());
 
     for (auto &source : this->sources_)
@@ -59,6 +65,7 @@ void Loader::Prepare()
             }
         }
     }
+    std::cout<<"7\n";
 }
 
 void Loader::AddClass(const std::string &source, const std::uint16_t &class_id, const std::string &class_name)
