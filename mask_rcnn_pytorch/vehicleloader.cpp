@@ -15,6 +15,7 @@ const std::set<std::string> VehicleLoader::csv_fields{"file", "pts", "labels", "
 
 void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &image_info)
 {
+    std::cout << string_points << std::endl;
     std::vector<std::string> v_string_points = SplitString(string_points, '|');
     for (const auto &s : v_string_points)
     {
@@ -178,9 +179,6 @@ void VehicleLoader::LoadData()
     int index = 0;
     for (auto &row : parser)
     {
-        if (index > 10){
-            break;
-        }
         if (!header_parsed)
         {
             for (auto &field : row)
@@ -258,5 +256,6 @@ void VehicleLoader::LoadData()
             this->AddImage(image_info);
             index++;
         }
+        break;
     }
 }
