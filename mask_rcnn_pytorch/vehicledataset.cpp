@@ -157,7 +157,7 @@ Sample VehicleDataset::get(size_t index)
     
 
     std::vector<float> boxes;
-
+    std::cout << "1000\n" ;
     std::vector<BoundingBox> bboxes = this->vehicle_loader_->LoadBBoxes(index);
     
     boxes.reserve(bboxes.size() * 4);
@@ -168,7 +168,7 @@ Sample VehicleDataset::get(size_t index)
         boxes.push_back(padding.top_pad + std::ceil((bbox.y + bbox.height) * scale));
         boxes.push_back(padding.left_pad + std::ceil((bbox.x + bbox.width) * scale));
     }
-    std::cout << "1000\n" ;
+    
 
     // Make training sample
     Sample result;
