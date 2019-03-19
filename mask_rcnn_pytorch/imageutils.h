@@ -10,6 +10,9 @@ cv::Mat LoadImage(const std::string path);
 
 at::Tensor CvImageToTensor(const cv::Mat& image);
 
+cv::Mat ConvertPolygonToMask(const std::vector<int32_t> &polygon,
+                                  const cv::Size &size);
+
 struct Window {
   int32_t y1{0};
   int32_t x1{0};
@@ -31,8 +34,17 @@ struct ImageMeta {
   int32_t image_width{0};
   int32_t image_height{0};
   Window window;
+  float scale;
+  std::vector<std::uint16_t> active_class_ids;
   // std::vector<int32_t> active_class_ids; Unused
 };
+
+struct ImageShape {
+        std::uint32_t width{0};
+        std::uint32_t height{0};
+        ImageShape() = default;
+        ImageShape(std::int32_t w, std::int32_t h): width(w), height(h){};
+    };
 
 /*
  * Resizes an image keeping the aspect ratio.

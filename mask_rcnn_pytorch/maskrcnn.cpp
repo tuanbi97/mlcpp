@@ -42,8 +42,8 @@ std::tuple<at::Tensor, at::Tensor> MaskRCNNImpl::Detect(
   return {detections, mrcnn_mask};
 }
 
-void MaskRCNNImpl::Train(CocoDataset train_dataset,
-                         CocoDataset val_dataset,
+void MaskRCNNImpl::Train(VehicleDataset train_dataset,
+                         VehicleDataset val_dataset,
                          double learning_rate,
                          uint32_t epochs,
                          std::string layers_regex) {
@@ -111,12 +111,14 @@ void MaskRCNNImpl::Train(CocoDataset train_dataset,
         torch::data::DataLoaderOptions().batch_size(1).workers(
             workers_num));  // random sampler is default
 
+    std::cout << "begin" << std::endl;
     // Training
     auto [loss, loss_rpn_class, loss_rpn_bbox, loss_mrcnn_class,
           loss_mrcnn_bbox, loss_mrcnn_mask] =
         TrainEpoch(reporter, *train_loader, optim_no_bn, optim_bn,
                    config_->steps_per_epoch);
 
+    std::cout << "end" << std::endl;
     //  Validation
     auto [val_loss, val_loss_rpn_class, val_loss_rpn_bbox, val_loss_mrcnn_class,
           val_loss_mrcnn_bbox, val_loss_mrcnn_mask] =
@@ -145,7 +147,7 @@ void MaskRCNNImpl::Train(CocoDataset train_dataset,
 
 std::tuple<float, float, float, float, float, float> MaskRCNNImpl::ValidEpoch(
     StatReporter& reporter,
-    torch::data::DataLoader<CocoDataset, torch::data::samplers::RandomSampler>&
+    torch::data::DataLoader<VehicleDataset, torch::data::samplers::RandomSampler>&
         datagenerator,
     uint32_t steps) {
   float loss_sum = 0;
@@ -226,7 +228,7 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::ValidEpoch(
 
 std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
     StatReporter& reporter,
-    torch::data::DataLoader<CocoDataset, torch::data::samplers::RandomSampler>&
+    torch::data::DataLoader<VehicleDataset, torch::data::samplers::RandomSampler>&
         datagenerator,
     torch::optim::SGD& optimizer,
     torch::optim::SGD& optimizer_bn,
@@ -242,9 +244,12 @@ std::tuple<float, float, float, float, float, float> MaskRCNNImpl::TrainEpoch(
 
   optimizer.zero_grad();
   optimizer_bn.zero_grad();
+  
+  std::cout << "train start" << std::endl;
 
   for (auto input : datagenerator) {
     ++batch_count;
+    std::cout << batch_count << std::endl;
     assert(input.size() == 1);
 
     // Wrap input in variables

@@ -81,10 +81,16 @@ set(SOURCE_FILES
                     detectiontargetlayer.cpp
                     nms.h
                     nms.cpp
-                    cocoloader.h
-                    cocoloader.cpp
-                    cocodataset.h
-                    cocodataset.cpp
+                    util.h
+                    fileutil.h
+                    fileutil.cpp
+                    csvparser.hpp
+                    loader.h
+                    loader.cpp
+                    vehicleloader.h
+                    vehicleloader.cpp
+                    vehicledataset.h
+                    vehicledataset.cpp
                     boxutils.h
                     boxutils.cpp
                     loss.h

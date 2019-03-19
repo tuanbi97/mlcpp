@@ -1,5 +1,6 @@
-#include "cocodataset.h"
-#include "cocoloader.h"
+#include "vehicledataset.h"
+#include "vehicleloader.h"
+#include "datasetclasses.h"
 #include "config.h"
 #include "debug.h"
 #include "imageutils.h"
@@ -80,13 +81,15 @@ int main(int argc, char** argv) {
 
     // load weights before moving to GPU
     if (params_path.find(".json") != std::string::npos) {
+	//printf("LoadJSON");
       LoadStateDictJson(*model, params_path);
     } else {
       // Uncoment to load only resnet
-      //      std::string ignore_layers =
-      //          "(fpn.P5\\_.*)|(fpn.P4\\_.*)|(fpn.P3\\_.*)|(fpn.P2\\_.*)|(rpn.*)|("
-      //          "classifier.*)|(mask.*)";
-      std::string ignore_layers{""};
+            std::string ignore_layers =
+                "(fpn.P5\\_.*)|(fpn.P4\\_.*)|(fpn.P3\\_.*)|(fpn.P2\\_.*)|(rpn.*)|("
+                "classifier.*)|(mask.*)";
+	//printf("Loadmodel");
+      //std::string ignore_layers{""};
       LoadStateDict(*model, params_path, ignore_layers);
     }
 
@@ -94,16 +97,20 @@ int main(int argc, char** argv) {
       model->to(torch::DeviceType::CUDA);
 
     // Make data sets
-    auto train_loader = std::make_unique<CocoLoader>(
-        fs::path(data_path) / "train2017",
-        fs::path(data_path) / "annotations/instances_train2017.json");
+    auto train_loader = std::make_unique<VehicleLoader>(
+        fs::path(data_path) / "",
+        fs::path(data_path) / "train_df_full.csv",
+        GetDatasetClasses());
+    std::cout << "begin\n";
     auto train_set =
-        std::make_unique<CocoDataset>(std::move(train_loader), config);
+        std::make_unique<VehicleDataset>(std::move(train_loader), config);
+    std::cout << "end\n";
 
-    auto val_loader = std::make_unique<CocoLoader>(
-        fs::path(data_path) / "val2017",
-        fs::path(data_path) / "annotations/instances_val2017.json");
-    auto val_set = std::make_unique<CocoDataset>(std::move(val_loader), config);
+    auto val_loader = std::make_unique<VehicleLoader>(
+        fs::path(data_path) / "",
+        fs::path(data_path) / "dev_df_full.csv",
+        GetDatasetClasses());
+    auto val_set = std::make_unique<VehicleDataset>(std::move(val_loader), config);
 
     //    // Training - Stage 1
     std::cout << "Training network heads" << std::endl;
