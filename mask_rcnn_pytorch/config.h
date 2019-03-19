@@ -25,7 +25,7 @@ class Config {
   // handle 2 images of 1024x1024px.
   // Adjust based on your GPU memory and image sizes. Use the highest
   // number that your GPU can handle for best performance.
-  uint32_t images_per_gpu = 4;
+  uint32_t images_per_gpu = 1;
 
   // Number of training steps per epoch
   // This doesn't need to match the size of the training set. Tensorboard
