@@ -32,14 +32,13 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
                 std::string ss = string_points.substr(previous_pos, i - previous_pos);
                 std::vector<std::int32_t> contour(0);
                 image_info.contours.push_back(contour);
+                if (image_info.id.compare("./data/training_img/300/DJI_0002_0025_1070.png") == 0){
+                    std::cout << ss << std::endl;
+                }
                 std::vector<std::string> v_points_string = SplitString(ss, ',');
                 for (auto &s : v_points_string)
                 {
                     int num = std::strtof(s.c_str(), 0);
-                    if (num >1000000000 || num < 0){
-                        std::cout << string_points << std::endl;
-                        std::cout << ss << std::endl;
-                    }
                     image_info.AddContourCoordinates(std::strtof(s.c_str(), 0));
                 }
             }
