@@ -15,7 +15,6 @@ const std::set<std::string> VehicleLoader::csv_fields{"file", "pts", "labels", "
 
 void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &image_info)
 {
-    std::cout<<"checkContours: " <<image_info.id << std::endl;
     int index = 0;
     int level = 0;
     int previous_pos = 0;
@@ -32,9 +31,6 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
                 std::string ss = string_points.substr(previous_pos, i - previous_pos);
                 std::vector<std::int32_t> contour(0);
                 image_info.contours.push_back(contour);
-                if (image_info.id.compare("./data/training_img/300/DJI_0002_0025_1070.png") == 0){
-                    std::cout << ss << std::endl;
-                }
                 std::vector<std::string> v_points_string = SplitString(ss, ',');
                 for (auto &s : v_points_string)
                 {
@@ -122,8 +118,6 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
         ++c_idx;
     }
 
-    std::cout << info.class_ids << std::endl;
-
     std::vector<std::string> s_class_ids = SplitString(info.class_ids, ',');
     std::vector<std::int32_t> class_ids;
     for (auto &s : s_class_ids)
@@ -147,31 +141,24 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
 
 std::vector<BoundingBox> VehicleLoader::LoadBBoxes(const std::uint64_t &image_id)
 {
-    std::cout<< image_id <<" " <<this->image_infos_.size() << std::endl;
     ImageInfo info = this->image_infos_[image_id];
-    std::cout << info.id << std::endl;
 
     assert(this->has_mask_);
 
     cv::Size size(info.width, info.height);
 
-    std::cout<<info.contours.size() << std::endl;
     std::vector<BoundingBox> boxes(info.contours.size());
 
     std::size_t c_idx = 0;
     int x1, y1, x2, y2;
-    std::cout<<info.contours.size() << std::endl;
     for (const auto &contour : info.contours)
     {
-        std::cout<<c_idx <<std::endl;
         x1 = 1000000000;
         y1 = 1000000000;
         x2 = -1000000000;
         y2 = -1000000000;
         int len = contour.size() / 2;
-        std::cout << len << " "  << std::endl;
         for (int i = 0; i < len; i++){
-            std::cout << contour[i * 2]  << " " << contour[i*2 + 1] << std::endl;
             x1 = std::min(x1, contour[i * 2]);
             y1 = std::min(y1, contour[i * 2 + 1]);
             x2 = std::max(x2, contour[i * 2]);

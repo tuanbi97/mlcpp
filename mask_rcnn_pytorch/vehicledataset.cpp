@@ -157,9 +157,7 @@ Sample VehicleDataset::get(size_t index)
     
 
     std::vector<float> boxes;
-    std::cout << "1000\n" ;
     std::vector<BoundingBox> bboxes = this->vehicle_loader_->LoadBBoxes(index);
-    std::cout << "2000\n" ;
     boxes.reserve(bboxes.size() * 4);
     for (auto bbox : bboxes)
     {
@@ -196,12 +194,9 @@ Sample VehicleDataset::get(size_t index)
                                  .clone();
     result.target.gt_class_ids = torch::tensor(mask_class_pair.second, at::dtype(at::kInt)).clone();
 
-    
-    std::cout << "load mask" << std::endl;
     // RPN Targets
     auto [rpn_match, rpn_bbox] = BuildRpnTargets(anchors_, result.target.gt_boxes, *config_);
     
-    std::cout << "finish mask" << std::endl;    
     // If more instances than fits in the array, sub-sample from them.
     if (result.target.gt_boxes.size(0) > config_->max_gt_instances)
     {
