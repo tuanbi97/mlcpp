@@ -32,7 +32,7 @@ struct ImageInfo
 
     void AddContourCoordinates(float v)
     {
-        contours.back().push_back(static_cast<std::int32_t>(v));
+        contours[contours.size() - 1].push_back(static_cast<std::int32_t>(v));
     }
 };
 
