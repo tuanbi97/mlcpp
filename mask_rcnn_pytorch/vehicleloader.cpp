@@ -153,6 +153,7 @@ std::vector<BoundingBox> VehicleLoader::LoadBBoxes(const std::uint64_t &image_id
 
     std::size_t c_idx = 0;
     int x1, y1, x2, y2;
+    std::cout<<info.contours.size() << std::endl;
     for (const auto &contour : info.contours)
     {
         std::cout<<c_idx <<std::endl;
