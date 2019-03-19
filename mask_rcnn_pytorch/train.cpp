@@ -22,7 +22,7 @@ class TrainConfig : public Config {
     if (!torch::cuda::is_available())
       throw std::runtime_error("Cuda is not available");
     gpu_count = 1;
-    images_per_gpu = 1;
+    images_per_gpu = 4;
     num_classes = 10;  // 4 - for shapes, 81 - for coco dataset
 
     UpdateSettings();
