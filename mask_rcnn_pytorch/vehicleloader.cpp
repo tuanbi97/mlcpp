@@ -141,18 +141,21 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
 
 std::vector<BoundingBox> VehicleLoader::LoadBBoxes(const std::uint64_t &image_id)
 {
+    std::cout<< image_id <<" " <<this.image_infos_.size() << std::endl;
     ImageInfo info = this->image_infos_[image_id];
 
     assert(this->has_mask_);
 
     cv::Size size(info.width, info.height);
 
+    std::cout<<info.contours.size() << std::endl;
     std::vector<BoundingBox> boxes(info.contours.size());
 
     std::size_t c_idx = 0;
     int x1, y1, x2, y2;
     for (const auto &contour : info.contours)
     {
+        std::cout<<c_idx <<std::endl;
         x1 = 1000000000;
         y1 = 1000000000;
         x2 = -1000000000;
