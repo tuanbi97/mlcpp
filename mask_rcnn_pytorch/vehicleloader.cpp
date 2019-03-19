@@ -162,7 +162,9 @@ std::vector<BoundingBox> VehicleLoader::LoadBBoxes(const std::uint64_t &image_id
         x2 = -1000000000;
         y2 = -1000000000;
         int len = info.contours.size() / 2;
+        std::cout << len << std::endl;
         for (int i = 0; i < len; i++){
+            std::cout << contour[i * 2]  << " " << contour[i*2 + 1] << std::endl;
             x1 = std::min(x1, contour[i * 2]);
             y1 = std::min(y1, contour[i * 2 + 1]);
             x2 = std::max(x2, contour[i * 2]);
