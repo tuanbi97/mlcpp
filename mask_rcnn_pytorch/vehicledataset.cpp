@@ -159,7 +159,7 @@ Sample VehicleDataset::get(size_t index)
     std::vector<float> boxes;
     std::cout << "1000\n" ;
     std::vector<BoundingBox> bboxes = this->vehicle_loader_->LoadBBoxes(index);
-    
+    std::cout << "2000\n" ;
     boxes.reserve(bboxes.size() * 4);
     for (auto bbox : bboxes)
     {
