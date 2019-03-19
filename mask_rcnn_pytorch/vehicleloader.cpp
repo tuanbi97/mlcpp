@@ -210,9 +210,9 @@ void VehicleLoader::LoadData()
     int index = 0;
     for (auto &row : parser)
     {
-        if (index > 100){
-            break;
-        }
+        // if (index > 100){
+        //     break;
+        // }
         if (!header_parsed)
         {
             for (auto &field : row)
