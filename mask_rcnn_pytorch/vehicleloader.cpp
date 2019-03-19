@@ -141,7 +141,7 @@ std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> VehicleLoader::LoadMa
 
 std::vector<BoundingBox> VehicleLoader::LoadBBoxes(const std::uint64_t &image_id)
 {
-    std::cout<< image_id <<" " <<this.image_infos_.size() << std::endl;
+    std::cout<< image_id <<" " <<this->image_infos_.size() << std::endl;
     ImageInfo info = this->image_infos_[image_id];
 
     assert(this->has_mask_);
