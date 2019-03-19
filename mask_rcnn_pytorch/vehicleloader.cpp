@@ -35,7 +35,7 @@ void VehicleLoader::_ParseContours(const std::string &string_points, ImageInfo &
                 for (auto &s : v_points_string)
                 {
                     int num = std::strtof(s.c_str(), 0);
-                    if (num == 0 || num < 0){
+                    if (num >1000000000 || num < 0){
                         std::cout << string_points << std::endl;
                         std::cout << ss << std::endl;
                     }
