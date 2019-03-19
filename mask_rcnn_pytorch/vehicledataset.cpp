@@ -153,7 +153,7 @@ Sample VehicleDataset::get(size_t index)
     
     std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> mask_class_pair = this->vehicle_loader_->LoadMask(index);
     
-
+    std::cout << "1000\n" ;
     auto masks = ResizeMasks(mask_class_pair.first, scale, padding);
     
 
