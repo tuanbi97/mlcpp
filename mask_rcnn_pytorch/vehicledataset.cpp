@@ -153,7 +153,6 @@ Sample VehicleDataset::get(size_t index)
     
     std::pair<std::vector<cv::Mat>, std::vector<std::int32_t>> mask_class_pair = this->vehicle_loader_->LoadMask(index);
     
-    std::cout << "1000\n" ;
     auto masks = ResizeMasks(mask_class_pair.first, scale, padding);
     
 
@@ -169,6 +168,7 @@ Sample VehicleDataset::get(size_t index)
         boxes.push_back(padding.top_pad + std::ceil((bbox.y + bbox.height) * scale));
         boxes.push_back(padding.left_pad + std::ceil((bbox.x + bbox.width) * scale));
     }
+    std::cout << "1000\n" ;
 
     // Make training sample
     Sample result;
